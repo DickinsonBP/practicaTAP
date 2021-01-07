@@ -23,25 +23,11 @@ public class MailStorePattern extends MailStore{
 		fileWriter.close();
 	}
 
-	@Override
-	public TreeSet<Message> getAllMessages() throws FileNotFoundException, ParseException {
-		return null;
-	}
-
-	@Override
-	public TreeSet<Message> getUserMessages(String username) throws FileNotFoundException, ParseException {
-		return null;
-	}
-
-	@Override
-	public TreeSet<User> getAllUsers() throws FileNotFoundException, ParseException {
-		return null;
-	}
-
 	/*
 	 * desencriptar mensajes
 	 */
-	public TreeSet<Message> getMail() throws FileNotFoundException, ParseException {
+	@Override
+	public TreeSet<Message> getAllMessages() throws FileNotFoundException, ParseException {
 		Scanner file = new Scanner(new FileReader("MailStoreEncrypted.txt"));
 
 		while(file.hasNext()) {
@@ -69,5 +55,18 @@ public class MailStorePattern extends MailStore{
 		file.close();
 		return this.messages;
 	}
+
+	@Override
+	public TreeSet<Message> getUserMessages(String username) throws FileNotFoundException, ParseException {
+		return null;
+	}
+
+	@Override
+	public TreeSet<User> getAllUsers() throws FileNotFoundException, ParseException {
+		return null;
+	}
+
+
+
 	
 }

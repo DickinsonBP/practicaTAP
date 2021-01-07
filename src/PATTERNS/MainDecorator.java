@@ -23,7 +23,8 @@ public class MainDecorator {
 		mbx1.attach(new SpamUserFilter());
 		mbx1.attach(new TooLongFilter());
 		MailboxPattern mbx2 = new MailboxPattern(u2,mailstore);
-		mbx2.attach(new SpamUserFilter());		MailboxPattern mbx3 = new MailboxPattern(u3,mailstore);
+		mbx2.attach(new SpamUserFilter());
+		MailboxPattern mbx3 = new MailboxPattern(u3,mailstore);
 		mbx3.attach(new SpamUserFilter());
 
 		Message msg1 = new Message("Nueva oferta de jamon!!!!","Tenemos jamones de oferta para la navidad!!!!!",u3,u1);

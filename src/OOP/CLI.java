@@ -127,13 +127,13 @@ public class CLI {
 		System.out.println("send <to> 'subject' 'body'");
 		System.out.println("update");
 		System.out.println("order <...>");
-		System.out.println("filter <...>");
+		System.out.println("filter <contains/lessthan> <>");
 		System.out.println("exit");
 	}
 
 	public void helpMenu() {
 		System.out.println("createuser <username> <name> <datebirth>");
-		System.out.println("filter <...>");
+		System.out.println("filter <contains/lessthan> <>");
 		System.out.println("logas <nombre de usuario>");
 		System.out.println("stop");
 	}

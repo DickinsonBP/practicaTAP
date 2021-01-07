@@ -33,7 +33,7 @@ public class MailStoreRedis extends MailStore{
 
     @Override
     public void sendMail(Message m) throws IOException {
-        jedis.lpush(m.getSender().getUserName(), m.toString());
+        this.jedis.lpush(m.getSender().getUserName(),m.toString());
     }
 
     @Override
