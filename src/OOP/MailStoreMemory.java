@@ -27,8 +27,12 @@ public class MailStoreMemory extends MailStore{
 	@Override
 	public TreeSet<Message> getUserMessages(String username) {
 		TreeSet<Message> userMessage = new TreeSet<Message>(new AddComparator());
+		List<Message> list = new ArrayList<>();
+		list = (List<Message>) list.stream().filter(p -> p.getReceiver().getUserName().equals(username));
 
-		userMessage.stream().filter(p -> p.getReceiver().getUserName().equals(username));
+		for(Message msg : list){
+			userMessage.add(msg);
+		}
 
 		return  userMessage;
 	}

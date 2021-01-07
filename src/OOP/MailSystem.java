@@ -69,16 +69,17 @@ public class MailSystem {
 	 * rutina que agrupa los mensajes por asunto de cualquier usuario
 	 */
 	public TreeSet<Message> groupMessages(String subject) {
-		Predicate<Message> pred = p -> p.getSubject() == subject;
+		Predicate<Message> pred = p -> p.getSubject().equals(subject);
 		return this.filterMessages(pred);
 	}
 	
 	/*
 	 * rutina que cuenta las palabras de todos los mensajes de un usario en particular
 	 */
-	public int countWords(String name) throws FileNotFoundException, ParseException {
+	public int countWords(String username) throws FileNotFoundException, ParseException {
 		int cont = 0;
-		for(Message i : this.mailStore.getUserMessages(name)) {
+		Mailbox mbx = this.mailBox.get(username);
+		for(Message i : mbx.getMessageList()) {
 			String[] message = i.getBody().split(" ");
 			cont += message.length;
 		}
