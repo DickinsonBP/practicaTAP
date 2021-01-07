@@ -46,7 +46,7 @@ public class CLI {
 		/*
 		 * metodo para cargar los usuarios del sistema
 		 */
-		TreeSet<Message> m = mailstore.getMail();
+		TreeSet<Message> m = mailstore.getAllMessages();
 		for(Message msg : m) {
 			if(!mailsystem.getMailBox().containsKey(msg.getReceiver().getUserName())) {
 				mbx = mailsystem.newUser(msg.getReceiver());

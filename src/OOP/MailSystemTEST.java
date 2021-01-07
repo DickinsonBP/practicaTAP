@@ -32,8 +32,7 @@ public class MailSystemTEST extends TestCase{
 		Mailbox mbx1 = mailsystem.newUser(u1);
 		Mailbox mbx2 = mailsystem.newUser(u2);
 		
-		Message msg = new Message("hola",u1,u2);
-		msg.setBody("Esto es un mensaje de prueba");
+		Message msg = new Message("hola","Esto es un mensaje de prueba",u1,u2);
 		
 		mailstore.sendMail(msg);
 		mbx2.updateMail();

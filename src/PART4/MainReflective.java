@@ -31,8 +31,7 @@ public class MainReflective {
             mailSystem.newUser(dickinson);
             mailSystem.newUser(anna);
 
-            Message msg = new Message("Hola",dickinson,anna);
-            msg.setBody("Es un saludo");
+            Message msg = new Message("Hola","Es un saludo",dickinson,anna);
             mailStore.sendMail(msg);
 
             Mailbox mbx = mailSystem.getMailBox().get(dickinson.getUserName());

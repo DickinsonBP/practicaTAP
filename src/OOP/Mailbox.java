@@ -19,7 +19,7 @@ public class Mailbox implements Iterable<Message>{
     
 
 	public void updateMail() throws FileNotFoundException, ParseException {
-    	TreeSet<Message> m = mailStore.getMail();
+    	TreeSet<Message> m = mailStore.getAllMessages();
     	
     	
     	for(Message msg : m) {

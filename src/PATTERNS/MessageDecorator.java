@@ -12,7 +12,7 @@ public abstract class MessageDecorator extends Message{
 	private Message msg;
 	
 	public MessageDecorator(Message m) {
-		super(m.getSubject(),m.getSender(),m.getReceiver());
+		super(m.getSubject(),m.getBody(),m.getSender(),m.getReceiver());
 		this.msg = m;
 	}
 	

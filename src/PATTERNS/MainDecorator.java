@@ -25,18 +25,14 @@ public class MainDecorator {
 		MailboxPattern mbx2 = new MailboxPattern(u2,mailstore);
 		mbx2.attach(new SpamUserFilter());		MailboxPattern mbx3 = new MailboxPattern(u3,mailstore);
 		mbx3.attach(new SpamUserFilter());
-		
-		Message msg1 = new Message("Nueva oferta de jamon!!!!",u3,u1);
-		msg1.setBody("Tenemos jamones de oferta para la navidad!!!!!");
+
+		Message msg1 = new Message("Nueva oferta de jamon!!!!","Tenemos jamones de oferta para la navidad!!!!!",u3,u1);
 		mailstore.sendMail(msg1);
-		Message msg2 = new Message("Hola",u1,u2);
-		msg2.setBody("Feliz navidad hola hola hola hola!!!");
+		Message msg2 = new Message("Hola","Feliz navidad hola hola hola hola!!!",u1,u2);
 		mailstore.sendMail(msg2);
-		Message msg3 = new Message("Respuesta",u2,u1);
-		msg3.setBody("Igualmente!!");
+		Message msg3 = new Message("Respuesta","Igualmente!!",u2,u1);
 		mailstore.sendMail(msg3);
-		Message msg4 = new Message("Neveras a buen precio!!!!",u3,u1);
-		msg4.setBody("Tenemos neveras a buen precio estas navidades!!!");
+		Message msg4 = new Message("Neveras a buen precio!!!!","Tenemos neveras a buen precio estas navidades!!!",u3,u1);
 		mailstore.sendMail(msg4);
 		
 		
