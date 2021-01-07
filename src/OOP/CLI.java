@@ -75,8 +75,7 @@ public class CLI {
 				 */
 				User receiver = mailsystem.getMailBox().get(a[1]).getUser();
 				User sender = mailsystem.getMailBox().get(username).getUser();
-				Message msg = new Message(parts[1],sender, receiver);
-				msg.setBody(parts[3]);
+				Message msg = new Message(parts[1],parts[3],sender, receiver);
 				mailstore.sendMail(msg);
 			}else if(a[0].equals("update")) {
 				/*

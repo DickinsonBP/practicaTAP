@@ -9,8 +9,9 @@ public class Message {
     private User sender, receiver;
     private Tiempo time;
 
-    public Message(String subject, User sender, User receiver) {
+    public Message(String subject, String body, User sender, User receiver) {
         this.subject = subject;
+        this.body = body;
         this.sender = sender;
         this.receiver = receiver;
         time = new Tiempo();

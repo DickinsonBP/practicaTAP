@@ -1,5 +1,7 @@
 package OOP;
 
+import com.sun.source.tree.Tree;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -20,15 +22,15 @@ public abstract class MailStore {
 	/*
 	 * rutina para obtener correos destinados a un usuario
 	 */
-	public abstract TreeSet<Message> getMail () throws FileNotFoundException, ParseException;
+	public abstract TreeSet<Message> getAllMessages () throws FileNotFoundException, ParseException;
 	
 
-	public TreeSet<Message> getMessages() {
-		return messages;
-	}
-	
+	public abstract TreeSet<Message> getUserMessages(String username) throws FileNotFoundException, ParseException;
+
 
 	public void setMessages(TreeSet<Message> messages) {
 		this.messages = messages;
 	}
+
+	public abstract TreeSet<User> getAllUsers() throws FileNotFoundException, ParseException;
 }

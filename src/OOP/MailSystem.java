@@ -16,7 +16,7 @@ public class MailSystem {
 	}
 	
 	/*
-	 * rutina para añadir un nuevo usuario al sistema, el usuario se añade a la lista de usuarios y se genera una mailbox para el
+	 * rutina para aï¿½adir un nuevo usuario al sistema, el usuario se aï¿½ade a la lista de usuarios y se genera una mailbox para el
 	 */
 	public Mailbox newUser(User user) {
 		Mailbox mbx = new Mailbox(user,this.mailStore);
@@ -30,7 +30,7 @@ public class MailSystem {
 	 * rutina que devuelve todos los mensajes que hay en el sistema
 	 */
 	public TreeSet<Message> allSystemMessages() throws FileNotFoundException, ParseException {
-		return this.mailStore.getMail();
+		return this.mailStore.getAllMessages();
 	}
 	
 	
@@ -50,8 +50,8 @@ public class MailSystem {
 	/*
 	 * rutina que devuelve el numero total de mensajes en el sistema
 	 */
-	public int totalMessages() {
-		return this.mailStore.getMessages().size();
+	public int totalMessages() throws FileNotFoundException, ParseException {
+		return this.mailStore.getAllMessages().size();
 	}
 	
 	/*
@@ -78,17 +78,15 @@ public class MailSystem {
 	 */
 	public int countWords(String name) throws FileNotFoundException, ParseException {
 		int cont = 0;
-		for(Message i : this.mailStore.getMail()) {
-			if(i.getSender().getName().contains(name) || i.getReceiver().getName().contains(name)) {
-				String[] message = i.getBody().split(" ");
-				cont += message.length;
-			}
+		for(Message i : this.mailStore.getUserMessages(name)) {
+			String[] message = i.getBody().split(" ");
+			cont += message.length;
 		}
 		return cont;
 	}
 	
 	/*
-	 * rutina para recivir mensajes para usuarios nacidos antes de cierto año
+	 * rutina para recivir mensajes para usuarios nacidos antes de cierto aï¿½o
 	 */
 	public TreeSet<Message> reciveMessages(int year){
 		Predicate<Message> pred = p -> p.getReceiver().getDateBirth() > year;

@@ -12,23 +12,21 @@ import java.text.ParseException;
 */
 public class MainRedis {
     public static void main(String[] args) throws IOException, ParseException {
-        MailStore mailStore = new MailStoreRedis();
-        User dickinson = new User("dickinsonbp","Dickinson Bedoya Perez",2000);
-        User anna = new User("annagracia","Anna Gracia",2000);
+        AbstractMailStoreFactory factory;
+        MailStore mailStore;
+        MailSystem mailSystem;
 
-        Message msg1 = new Message("Saludo",dickinson,anna);
-        msg1.setBody("Hola Anna!!!!!");
+        factory = new MemoryMailStoreFactory();
+        mailSystem = new MailSystem(factory.createMailStore());
+        System.out.println("Memory numberMessagesmail:\t" + mailSystem.numberMessages());
 
-        mailStore.sendMail(msg1);
-        Message msg2 = new Message("Despedida",anna,dickinson);
-        msg2.setBody("Adios Dickinson!!!!");
+        factory = new FileMailStoreFactory();
+        mailSystem = new MailSystem(factory.createMailStore());
+        System.out.println("File numberMessagesmail:\t" + mailSystem.numberMessages());
 
-        mailStore.sendMail(msg2);
-        Message msg3 = new Message("Triste",dickinson,anna);
-        msg3.setBody("Pq me rechazas :(");
+        factory = new RedisMailStoreFactory();
+        mailSystem = new MailSystem(factory.createMailStore());
+        System.out.println("Redis numberMessages:\t\t" + mailSystem.numberMessages());
 
-        mailStore.sendMail(msg3);
-
-        System.out.println(mailStore.getMail());
     }
 }
