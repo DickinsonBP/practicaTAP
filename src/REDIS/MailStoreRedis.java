@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.*;
 
-public class MailStoreRedis extends MailStore{
+public class MailStoreRedis{
 
     private static Jedis jedis;
 
@@ -21,6 +21,10 @@ public class MailStoreRedis extends MailStore{
         if(this.jedis == null){
             //iniciar solo si no se ha iniciado antes
             jedis = new Jedis("localhost");
+            Set<String> keys = jedis.keys("*");
+            for(String i : keys){
+                jedis.del(i);
+            }
         }
         return jedis;
     }
@@ -31,27 +35,26 @@ public class MailStoreRedis extends MailStore{
     }
 
 
-    @Override
+
     public void sendMail(Message m) throws IOException {
+        //this.jedis.del(m.getSender().getUserName());
         this.jedis.lpush(m.getSender().getUserName(),m.toString());
     }
 
-    @Override
+
     public TreeSet<Message> getAllMessages() throws FileNotFoundException, ParseException {
-        List<Message> list = new ArrayList<Message>();
+        TreeSet<Message> messageList = new TreeSet<Message>(new AddComparator());
         for(String username : this.getUserNames()){
             TreeSet<Message> userMessage = this.getUserMessages(username);
-            list.addAll(userMessage);
+            messageList.addAll(userMessage);
         }
-        TreeSet<Message> messageList = new TreeSet<Message>(new AddComparator());
-        messageList.addAll(list);
         return messageList;
     }
 
-    @Override
+
     public TreeSet<Message> getUserMessages(String username) throws FileNotFoundException, ParseException {
         List<String> list = jedis.lrange(username,0,-1);
-        User sender = null,receiver=null;
+        User sender,receiver;
         TreeSet<Message> userMessage = new TreeSet<Message>(new AddComparator());
 
         for(String message : list){
@@ -59,13 +62,9 @@ public class MailStoreRedis extends MailStore{
             String [] parts = message.split(";");
             String [] senderParts = parts[1].split("-");
             String [] receiverParts = parts[4].split("-");
-            sender.setUserName(senderParts[0]);
-            sender.setName(senderParts[1]);
-            sender.setDateBirth(Integer.parseInt(senderParts[2]));
+            sender = new User(senderParts[0],senderParts[1],Integer.parseInt(senderParts[2]));
 
-            receiver.setUserName(receiverParts[0]);
-            receiver.setName(receiverParts[1]);
-            receiver.setDateBirth(Integer.parseInt(receiverParts[2]));
+            receiver = new User(receiverParts[0],receiverParts[1],Integer.parseInt(quitarSalto(receiverParts[2])));
 
             Message msg = new Message(parts[2],parts[3],sender,receiver);
 
@@ -75,7 +74,10 @@ public class MailStoreRedis extends MailStore{
         return userMessage;
     }
 
-    @Override
+
+    private String quitarSalto(String msg){
+        return msg.replaceAll("\n", "");
+    }
     public TreeSet<User> getAllUsers() throws FileNotFoundException, ParseException {
         /*Set<String> usernames = (jedis.keys("*"));
         TreeSet<User> allUsers = new TreeSet<User>();
@@ -94,6 +96,7 @@ public class MailStoreRedis extends MailStore{
     }
 
     private Set<String> getUserNames(){
-        return jedis.keys("*");
+        Set<String> names = jedis.keys("*");
+        return names;
     }
 }

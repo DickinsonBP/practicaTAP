@@ -39,11 +39,11 @@ public class MailSystem {
 	 */
 	public TreeSet<Message> filterMessages(Predicate<Message> pred) {
 		TreeSet<Message> list = new TreeSet<Message>(new AddComparator());
-		
+
 		for(Mailbox mbx : this.mailBox.values()) {
 			list.addAll((ArrayList<Message>) mbx.filter(pred));
 		}
-		
+
 		return list;
     }
 
@@ -51,7 +51,10 @@ public class MailSystem {
 	 * rutina que devuelve el numero total de mensajes en el sistema
 	 */
 	public int totalMessages() throws FileNotFoundException, ParseException {
-		return this.mailStore.getAllMessages().size();
+		int result = 0;
+		//result = this.allSystemMessages().size();
+		result = this.mailStore.getAllMessages().size();
+		return result;
 	}
 	
 	/*
@@ -62,7 +65,7 @@ public class MailSystem {
 		for(Mailbox i : this.mailBox.values()) {
 			cont += i.getMessageList().size();
 		}
-		return (cont/this.mailBox.size());
+		return cont/this.mailBox.size();
 	}
 	
 	/*

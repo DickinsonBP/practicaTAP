@@ -67,13 +67,7 @@ public class Mailbox implements Iterable<Message>{
     	this.messageList.add(m);
     }
     
-    /*
-     * rutina para filtrar por diferentes filtros:
-     * 1-> por nombre de usuario al que ha enviado algun correo
-     * 2-> por asunto
-     * 3-> por fecha
-     * 
-     */
+
     public ArrayList<Message> filter(Predicate<Message> pred){
     	return (ArrayList<Message>) this.messageList.stream().filter(pred).collect(Collectors.toList());
     }

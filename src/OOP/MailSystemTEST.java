@@ -97,7 +97,8 @@ public class MailSystemTEST extends TestCase{
 
 		int expected = 2;
 		int result = mailsystem.totalMessages();
-		assertEquals(result,expected);
+		assertEquals(expected,result);
+		//assertEquals(result,expected);
 	}
 
 	@Test
@@ -119,7 +120,8 @@ public class MailSystemTEST extends TestCase{
 
 		double expected = 2.0;
 		double result = mailsystem.averageUserMessage();
-		assertEquals(result,expected);
+		assertEquals(expected,result,1);
+		//assertEquals(result,expected);
 
 	}
 
